@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/umbracle/ethgo/jsonrpc/codec"
+	"github.com/ginharu/ethgo/jsonrpc/codec"
 	"github.com/valyala/fasthttp"
 )
 

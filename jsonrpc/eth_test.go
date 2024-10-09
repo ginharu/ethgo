@@ -7,11 +7,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/abi"
+	"github.com/ginharu/ethgo/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/abi"
-	"github.com/umbracle/ethgo/testutil"
 )
 
 var (

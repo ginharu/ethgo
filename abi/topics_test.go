@@ -6,10 +6,10 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/testutil"
 )
 
 func TestTopicEncoding(t *testing.T) {

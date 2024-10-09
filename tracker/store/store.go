@@ -1,6 +1,6 @@
 package store
 
-import "github.com/umbracle/ethgo"
+import "github.com/ginharu/ethgo"
 
 // Store is a datastore for the tracker
 type Store interface {

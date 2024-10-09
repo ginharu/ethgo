@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/ginharu/ethgo"
 	"github.com/stretchr/testify/require"
-	"github.com/umbracle/ethgo"
 )
 
 type Message struct {

@@ -4,10 +4,10 @@ import (
 	"encoding/hex"
 	"testing"
 
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/abi"
+	"github.com/ginharu/ethgo/testutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/abi"
-	"github.com/umbracle/ethgo/testutil"
 )
 
 func TestContract_Signatures(t *testing.T) {

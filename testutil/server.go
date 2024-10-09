@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/compiler"
 	"github.com/ory/dockertest"
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/compiler"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -56,7 +56,7 @@ func MultiAddr(t *testing.T, c func(s *TestServer, addr string)) {
 	// ip addr
 	// c(s, s.IPCPath())
 
-	// s.Close()
+	//s.Close()
 }
 
 // TestServerConfig is the configuration of the server
@@ -154,7 +154,7 @@ func NewTestServer(t *testing.T, addrs ...string) *TestServer {
 		addr = addrs[0]
 	} else {
 		// default address
-		addr = "http://127.0.0.1:8545"
+		addr = "https://arbitrum-mainnet.infura.io/v3/ad7e952ee8e94c229c67d140c17086d5"
 	}
 
 	server := &TestServer{

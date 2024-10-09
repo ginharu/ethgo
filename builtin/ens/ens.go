@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/contract"
-	"github.com/umbracle/ethgo/jsonrpc"
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/contract"
+	"github.com/ginharu/ethgo/jsonrpc"
 )
 
 var (
@@ -50,7 +50,7 @@ func (e *ENS) Owner(node [32]byte, block ...ethgo.BlockNumber) (retval0 ethgo.Ad
 		err = fmt.Errorf("failed to encode output at index 0")
 		return
 	}
-	
+
 	return
 }
 
@@ -70,7 +70,7 @@ func (e *ENS) Resolver(node [32]byte, block ...ethgo.BlockNumber) (retval0 ethgo
 		err = fmt.Errorf("failed to encode output at index 0")
 		return
 	}
-	
+
 	return
 }
 
@@ -90,7 +90,7 @@ func (e *ENS) Ttl(node [32]byte, block ...ethgo.BlockNumber) (retval0 uint64, er
 		err = fmt.Errorf("failed to encode output at index 0")
 		return
 	}
-	
+
 	return
 }
 

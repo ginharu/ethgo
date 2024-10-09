@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/umbracle/ethgo/abi"
+	"github.com/ginharu/ethgo/abi"
 )
 
 var abiENS *abi.ABI

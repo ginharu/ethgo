@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/abi"
-	"github.com/umbracle/ethgo/contract"
-	"github.com/umbracle/ethgo/jsonrpc"
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/abi"
+	"github.com/ginharu/ethgo/contract"
+	"github.com/ginharu/ethgo/jsonrpc"
 )
 
 func handleErr(err error) {

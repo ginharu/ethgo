@@ -1,6 +1,6 @@
 export default {
-    projectLink: 'https://github.com/umbracle/ethgo', // GitHub link in the navbar
-    docsRepositoryBase: 'https://github.com/umbracle/ethgo/tree/master/website/pages', // base URL for the docs repository
+    projectLink: 'https://github.com/ginharu/ethgo', // GitHub link in the navbar
+    docsRepositoryBase: 'https://github.com/ginharu/ethgo/tree/master/website/pages', // base URL for the docs repository
     titleSuffix: ' – Ethgo',
     nextLinks: true,
     prevLinks: true,
@@ -10,7 +10,7 @@ export default {
     footer: true,
     footerText: (
       <>
-        Powered by <a href="https://umbracle.io">Umbracle</a>
+        Powered by <a href="https://ginharu.io">Umbracle</a>
       </>
     ),
     footerEditLink: `Edit this page on GitHub`,

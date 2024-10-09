@@ -1,10 +1,10 @@
-module github.com/umbracle/ethgo/cmd
+module github.com/ginharu/ethgo/cmd
 
 go 1.17
 
 require (
 	github.com/mitchellh/cli v1.1.2
-	github.com/umbracle/ethgo v0.0.0-20220303093617-1621d9ff042b
+	github.com/ginharu/ethgo v0.0.0-20220303093617-1621d9ff042b
 )
 
 require github.com/spf13/pflag v1.0.5
@@ -31,7 +31,7 @@ require (
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.3 // indirect
 	github.com/mitchellh/copystructure v1.0.0 // indirect
-	github.com/mitchellh/mapstructure v1.1.2 // indirect
+	github.com/mitchellh/mapstructure v1.4.1 // indirect
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/posener/complete v1.1.1 // indirect
 	github.com/tyler-smith/go-bip39 v1.1.0 // indirect
@@ -40,8 +40,8 @@ require (
 	github.com/valyala/fasthttp v1.4.0 // indirect
 	github.com/valyala/fastjson v1.4.1 // indirect
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
-	golang.org/x/sys v0.0.0-20191026070338-33540a1f6037 // indirect
-	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 )
 
-replace github.com/umbracle/ethgo => ../
+replace github.com/ginharu/ethgo => ../

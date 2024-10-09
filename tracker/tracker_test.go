@@ -10,15 +10,15 @@ import (
 	"testing"
 	"time"
 
+	"github.com/ginharu/ethgo"
+	"github.com/ginharu/ethgo/abi"
+	"github.com/ginharu/ethgo/blocktracker"
+	"github.com/ginharu/ethgo/jsonrpc"
+	"github.com/ginharu/ethgo/jsonrpc/codec"
+	"github.com/ginharu/ethgo/testutil"
+	"github.com/ginharu/ethgo/tracker/store/inmem"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/umbracle/ethgo"
-	"github.com/umbracle/ethgo/abi"
-	"github.com/umbracle/ethgo/blocktracker"
-	"github.com/umbracle/ethgo/jsonrpc"
-	"github.com/umbracle/ethgo/jsonrpc/codec"
-	"github.com/umbracle/ethgo/testutil"
-	"github.com/umbracle/ethgo/tracker/store/inmem"
 )
 
 func testConfig() ConfigOption {
