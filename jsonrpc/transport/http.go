@@ -19,10 +19,26 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 	return &HTTP{
 		addr: addr,
 		client: &fasthttp.Client{
-			DialDualStack:   true,
-			ReadTimeout:     10 * time.Second,
-			MaxConnsPerHost: 1000,
+			DialDualStack:       true,
+			MaxConnsPerHost:     1000,
+			MaxIdleConnDuration: 5 * time.Second, //// 空闲链接时间应短，避免请求服务的 keep-alive 过短主动关闭
+			MaxConnDuration:     10 * time.Minute,
+			ReadTimeout:         30 * time.Second,
+			WriteTimeout:        30 * time.Second,
+			MaxResponseBodySize: 1024 * 1024 * 10,
+			MaxConnWaitTimeout:  time.Minute,
+			//Dial: func(addr string) (net.Conn, error) {
+			//	idx := 3 // 重试三次
+			//	for {
+			//		idx--
+			//		conn, err := defaultDialer.DialTimeout(addr, 10*time.Second) // tcp连接超时时间10s
+			//		if err != fasthttp.ErrDialTimeout || idx == 0 {
+			//			return conn, err
+			//		}
+			//	}
+			//},
 		},
+
 		headers: headers,
 	}
 }
