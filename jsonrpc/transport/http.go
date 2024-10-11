@@ -3,9 +3,9 @@ package transport
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/ginharu/ethgo/jsonrpc/codec"
 	"github.com/valyala/fasthttp"
+	"time"
 )
 
 // HTTP is an http transport
@@ -19,7 +19,9 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 	return &HTTP{
 		addr: addr,
 		client: &fasthttp.Client{
-			DialDualStack: true,
+			DialDualStack:   true,
+			ReadTimeout:     10 * time.Second,
+			MaxConnsPerHost: 1000,
 		},
 		headers: headers,
 	}
