@@ -53,7 +53,8 @@ func (b *Block) UnmarshalJSON(buf []byte) error {
 		return err
 	}
 	if err = decodeHash(&b.MixHash, v, "mixHash"); err != nil {
-		return err
+		b.MixHash = Hash{}
+		//return err
 	}
 	if err = decodeNonce(&b.Nonce, v, "nonce"); err != nil {
 		return err
