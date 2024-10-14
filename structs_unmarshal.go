@@ -57,7 +57,8 @@ func (b *Block) UnmarshalJSON(buf []byte) error {
 		//return err
 	}
 	if err = decodeNonce(&b.Nonce, v, "nonce"); err != nil {
-		return err
+		b.Nonce = [8]byte{}
+		//return err
 	}
 	if b.Timestamp, err = decodeUint(v, "timestamp"); err != nil {
 		return err
