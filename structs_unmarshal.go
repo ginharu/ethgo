@@ -330,7 +330,9 @@ func (r *Receipt) UnmarshalJSON(buf []byte) error {
 			return err
 		}
 	}
-
+	if r.L1Fee, err = decodeUint(v, "l1Fee"); err != nil {
+		r.L1Fee = 0
+	}
 	if v.Exists("to") {
 		// Do not decode 'to' if it doesn't exist.
 		if v.Get("to").String() != "null" {

@@ -290,6 +290,7 @@ type Receipt struct {
 	BlockHash         Hash
 	From              Address
 	BlockNumber       uint64
+	L1Fee             uint64
 	GasUsed           uint64
 	CumulativeGasUsed uint64
 	LogsBloom         []byte
