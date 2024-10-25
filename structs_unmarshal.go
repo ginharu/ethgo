@@ -170,7 +170,7 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 	if err = decodeAddr(&t.From, v, "from"); err != nil {
 		return err
 	}
-	if t.Type == TransactionDynamicFee {
+	if t.Type == TransactionDynamicFee || t.Type == TransactionBlobTx {
 		if t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas"); err != nil {
 			return err
 		}

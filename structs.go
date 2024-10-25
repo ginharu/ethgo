@@ -173,6 +173,8 @@ const (
 	TransactionAccessList TransactionType = 1
 	// eip-1559
 	TransactionDynamicFee TransactionType = 2
+	// eip-4844
+	TransactionBlobTx TransactionType = 3
 )
 
 type Transaction struct {
