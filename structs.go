@@ -175,6 +175,8 @@ const (
 	TransactionDynamicFee TransactionType = 2
 	// eip-4844
 	TransactionBlobTx TransactionType = 3
+
+	TransactionZKLinkTx TransactionType = 255
 )
 
 type Transaction struct {

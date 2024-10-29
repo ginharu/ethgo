@@ -170,15 +170,15 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 	if err = decodeAddr(&t.From, v, "from"); err != nil {
 		return err
 	}
-	if t.Type == TransactionDynamicFee || t.Type == TransactionBlobTx {
+	if t.Type == TransactionLegacy || t.Type == TransactionAccessList {
+		if t.GasPrice, err = decodeUint(v, "gasPrice"); err != nil {
+			return err
+		}
+	} else {
 		if t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas"); err != nil {
 			return err
 		}
 		if t.MaxFeePerGas, err = decodeBigInt(t.MaxFeePerGas, v, "maxFeePerGas"); err != nil {
-			return err
-		}
-	} else if t.Type == TransactionLegacy || t.Type == TransactionAccessList {
-		if t.GasPrice, err = decodeUint(v, "gasPrice"); err != nil {
 			return err
 		}
 	}
@@ -205,15 +205,15 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 		}
 	}
 
-	if t.V, err = decodeBytes(t.V[:0], v, "v"); err != nil {
-		return err
-	}
-	if t.R, err = decodeBytes(t.R[:0], v, "r"); err != nil {
-		return err
-	}
-	if t.S, err = decodeBytes(t.S[:0], v, "s"); err != nil {
-		return err
-	}
+	//if t.V, err = decodeBytes(t.V[:0], v, "v"); err != nil {
+	//	return err
+	//}
+	//if t.R, err = decodeBytes(t.R[:0], v, "r"); err != nil {
+	//	return err
+	//}
+	//if t.S, err = decodeBytes(t.S[:0], v, "s"); err != nil {
+	//	return err
+	//}
 
 	if t.Type == TransactionDynamicFee || t.Type == TransactionAccessList {
 		if t.ChainID, err = decodeBigInt(t.ChainID, v, "chainId"); err != nil {
@@ -251,7 +251,6 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 			return err
 		}
 	}
-
 	return nil
 }
 
