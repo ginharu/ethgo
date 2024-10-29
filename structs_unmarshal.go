@@ -96,7 +96,7 @@ func (b *Block) UnmarshalJSON(buf []byte) error {
 			for _, elem := range elems {
 				txn := new(Transaction)
 				if err := txn.unmarshalJSON(elem); err != nil {
-					panic(err)
+					continue
 				}
 				b.Transactions = append(b.Transactions, txn)
 			}
