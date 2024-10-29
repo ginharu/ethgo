@@ -122,15 +122,15 @@ func (t *Transaction) marshalJSON(a *fastjson.Arena) *fastjson.Value {
 	if t.Value != nil {
 		o.Set("value", a.NewString(fmt.Sprintf("0x%x", t.Value)))
 	}
-	if t.Type == TransactionDynamicFee {
+	if t.Type == TransactionLegacy || t.Type == TransactionAccessList {
+		o.Set("gasPrice", a.NewString(fmt.Sprintf("0x%x", t.GasPrice)))
+	} else {
 		if t.MaxPriorityFeePerGas != nil {
 			o.Set("maxPriorityFeePerGas", a.NewString(fmt.Sprintf("0x%x", t.MaxPriorityFeePerGas)))
 		}
 		if t.MaxFeePerGas != nil {
 			o.Set("maxFeePerGas", a.NewString(fmt.Sprintf("0x%x", t.MaxFeePerGas)))
 		}
-	} else {
-		o.Set("gasPrice", a.NewString(fmt.Sprintf("0x%x", t.GasPrice)))
 	}
 	// gas limit fields
 	if t.Gas != 0 {
