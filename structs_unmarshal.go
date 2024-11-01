@@ -174,14 +174,15 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 		if t.GasPrice, err = decodeUint(v, "gasPrice"); err != nil {
 			return err
 		}
-	} else {
-		if t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas"); err != nil {
-			return err
-		}
-		if t.MaxFeePerGas, err = decodeBigInt(t.MaxFeePerGas, v, "maxFeePerGas"); err != nil {
-			return err
-		}
 	}
+	//else {
+	//	if t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas"); err != nil {
+	//		return err
+	//	}
+	//	if t.MaxFeePerGas, err = decodeBigInt(t.MaxFeePerGas, v, "maxFeePerGas"); err != nil {
+	//		return err
+	//	}
+	//}
 	if t.Input, err = decodeBytes(t.Input[:0], v, "input"); err != nil {
 		return err
 	}
