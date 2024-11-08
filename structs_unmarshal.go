@@ -691,7 +691,8 @@ func unmarshalTextByte(dst, src []byte, size int) error {
 
 	str = strings.Trim(str, "\"")
 	if !strings.HasPrefix(str, "0x") {
-		return fmt.Errorf("0x prefix not found")
+		str = "0x" + str
+		//return fmt.Errorf("0x prefix not found")
 	}
 	str = str[2:]
 	b, err := hex.DecodeString(str)
