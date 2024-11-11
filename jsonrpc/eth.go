@@ -53,6 +53,15 @@ func (e *Eth) BlockNumber() (uint64, error) {
 	return parseUint64orHex(out)
 }
 
+// 2024-11-11: BSC eth_getFinalizedHeader
+func (e *Eth) BscBlockNumber() (uint64, error) {
+	var b *ethgo.BscFinalizedHeader
+	if err := e.c.Call("eth_getFinalizedHeader", &b, 15); err != nil {
+		return 0, err
+	}
+	return parseUint64orHex(b.Number)
+}
+
 // GetBlockByNumber returns information about a block by block number.
 func (e *Eth) GetBlockByNumber(i ethgo.BlockNumber, full bool) (*ethgo.Block, error) {
 	var b *ethgo.Block

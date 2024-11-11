@@ -129,6 +129,10 @@ func (h Hash) Location() string {
 	return h.String()
 }
 
+type BscFinalizedHeader struct {
+	Number   string
+}
+
 type Block struct {
 	Number             uint64
 	Hash               Hash
