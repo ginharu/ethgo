@@ -180,7 +180,11 @@ const (
 	// eip-4844
 	TransactionBlobTx TransactionType = 3
 
+	// Wemix 0x16
+	TransactionWemixTx TransactionType = 22
+
 	TransactionZKLinkTx TransactionType = 255
+
 )
 
 type Transaction struct {
