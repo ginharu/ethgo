@@ -25,7 +25,7 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 			MaxConnDuration:     10 * time.Minute,
 			ReadTimeout:         30 * time.Second,
 			WriteTimeout:        30 * time.Second,
-			MaxResponseBodySize: 1024 * 1024 * 10,
+			MaxResponseBodySize: 1024 * 1024 * 1000,
 			MaxConnWaitTimeout:  time.Minute,
 			//Dial: func(addr string) (net.Conn, error) {
 			//	idx := 3 // 重试三次
@@ -97,7 +97,6 @@ func (h *HTTP) Call(method string, out interface{}, params ...interface{}) error
 	if response.Error != nil {
 		return response.Error
 	}
-
 
 	if err := json.Unmarshal(response.Result, out); err != nil {
 		return err
