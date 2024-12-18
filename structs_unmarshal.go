@@ -170,9 +170,9 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 	if err = decodeAddr(&t.From, v, "from"); err != nil {
 		return err
 	}
-	t.GasPrice, err = decodeUint(v, "gasPrice");
-	t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas");
-	t.MaxFeePerGas, err = decodeBigInt(t.MaxFeePerGas, v, "maxFeePerGas");
+	t.GasPrice, err = decodeUint(v, "gasPrice")
+	t.MaxPriorityFeePerGas, err = decodeBigInt(t.MaxPriorityFeePerGas, v, "maxPriorityFeePerGas")
+	t.MaxFeePerGas, err = decodeBigInt(t.MaxFeePerGas, v, "maxFeePerGas")
 
 	//if t.Type == TransactionLegacy || t.Type == TransactionAccessList {
 	//	if t.GasPrice, err = decodeUint(v, "gasPrice"); err != nil {
@@ -217,16 +217,15 @@ func (t *Transaction) unmarshalJSON(v *fastjson.Value) error {
 	//	return err
 	//}
 
-	if t.Type == TransactionDynamicFee || t.Type == TransactionAccessList {
-		if t.ChainID, err = decodeBigInt(t.ChainID, v, "chainId"); err != nil {
-			return err
-		}
-		if isKeySet(v, "accessList") {
-			if err := t.AccessList.unmarshalJSON(v.Get("accessList")); err != nil {
-				return err
-			}
-		}
-	}
+	//if t.Type == TransactionDynamicFee || t.Type == TransactionAccessList {
+	//	if t.ChainID, err = decodeBigInt(t.ChainID, v, "chainId"); err != nil {
+	//	}
+	//	if isKeySet(v, "accessList") {
+	//		if err := t.AccessList.unmarshalJSON(v.Get("accessList")); err != nil {
+	//
+	//		}
+	//	}
+	//}
 
 	if t.Gas, err = decodeUint(v, "gas"); err != nil {
 		return err
