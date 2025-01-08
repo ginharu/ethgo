@@ -1,6 +1,8 @@
 module github.com/ginharu/ethgo/cmd
 
-go 1.17
+go 1.22
+
+toolchain go1.22.3
 
 require (
 	github.com/ginharu/ethgo v0.0.0-20220303093617-1621d9ff042b
@@ -15,13 +17,13 @@ require (
 	github.com/Masterminds/sprig v2.22.0+incompatible // indirect
 	github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310 // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
-	github.com/btcsuite/btcd v0.22.1 // indirect
-	github.com/btcsuite/btcd/chaincfg/chainhash v1.0.1 // indirect
+	github.com/btcsuite/btcd v0.24.2 // indirect
+	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0 // indirect
 	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.1.2 // indirect
-	github.com/gorilla/websocket v1.4.1 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.0.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
@@ -40,7 +42,7 @@ require (
 	github.com/valyala/fasthttp v1.56.0 // indirect
 	github.com/valyala/fastjson v1.4.1 // indirect
 	golang.org/x/crypto v0.27.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
 )
 
