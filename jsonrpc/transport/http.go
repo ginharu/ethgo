@@ -62,6 +62,13 @@ func (h *HTTP) Call(method string, out interface{}, params ...interface{}) error
 		}
 		request.Params = data
 	}
+	if len(params) <= 0 && method == "eth_blockNumber" {
+		request.Params = []byte("[]")
+	}
+
+	//data3, err := json.MarshalIndent(request, "", "    ")
+	//fmt.Println(fmt.Sprintf("%s, %+v", string(data3), err))
+
 	raw, err := json.Marshal(request)
 	if err != nil {
 		return err
