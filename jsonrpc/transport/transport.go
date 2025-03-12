@@ -12,6 +12,7 @@ type Transport interface {
 
 	// SetMaxConnsPerHost sets the maximum number of connections that can be established with a host
 	SetMaxConnsPerHost(count int)
+	SetUserAgent(userAgent string)
 
 	// Close closes the transport connection if necessary
 	Close() error

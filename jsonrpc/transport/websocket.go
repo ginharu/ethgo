@@ -260,6 +260,10 @@ func (s *stream) Subscribe(method string, callback func(b []byte)) (func() error
 func (s *stream) SetMaxConnsPerHost(count int) {
 }
 
+func (s *stream) SetUserAgent(str string) {
+
+}
+
 type websocketCodec struct {
 	conn *websocket.Conn
 }

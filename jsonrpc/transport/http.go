@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// HTTP is an http transport
+// HTTP is a http transport
 type HTTP struct {
 	addr    string
 	client  *fasthttp.Client
@@ -22,11 +22,11 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 			DialDualStack:       true,
 			MaxConnsPerHost:     1000,
 			MaxIdleConnDuration: 5 * time.Second, //// 空闲链接时间应短，避免请求服务的 keep-alive 过短主动关闭
-			MaxConnDuration:     10 * time.Minute,
+			//MaxConnDuration:     10 * time.Minute,
 			ReadTimeout:         30 * time.Second,
 			WriteTimeout:        30 * time.Second,
 			MaxResponseBodySize: 1024 * 1024 * 1000,
-			MaxConnWaitTimeout:  time.Minute,
+			//MaxConnWaitTimeout:  time.Minute,
 			//Dial: func(addr string) (net.Conn, error) {
 			//	idx := 3 // 重试三次
 			//	for {
@@ -83,6 +83,7 @@ func (h *HTTP) Call(method string, out interface{}, params ...interface{}) error
 	req.SetRequestURI(h.addr)
 	req.Header.SetMethod("POST")
 	req.Header.SetContentType("application/json")
+	//fmt.Print("headers: ", h.headers, "\n")
 	for k, v := range h.headers {
 		req.Header.Add(k, v)
 	}
@@ -114,4 +115,9 @@ func (h *HTTP) Call(method string, out interface{}, params ...interface{}) error
 // SetMaxConnsPerHost sets the maximum number of connections that can be established with a host
 func (h *HTTP) SetMaxConnsPerHost(count int) {
 	h.client.MaxConnsPerHost = count
+}
+
+func (h *HTTP) SetUserAgent(userAgent string) {
+	h.headers["Accept"] = "application/json"
+	h.headers["User-Agent"] = userAgent
 }

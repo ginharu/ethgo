@@ -65,3 +65,7 @@ func (c *Client) Call(method string, out interface{}, params ...interface{}) err
 func (c *Client) SetMaxConnsLimit(count int) {
 	c.transport.SetMaxConnsPerHost(count)
 }
+
+func (c *Client) SetReqUserAgent(agent string) {
+	c.transport.SetUserAgent(agent)
+}
