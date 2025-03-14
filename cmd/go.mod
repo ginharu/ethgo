@@ -1,8 +1,6 @@
 module github.com/ginharu/ethgo/cmd
 
-go 1.22
-
-toolchain go1.22.3
+go 1.23.2
 
 require (
 	github.com/ginharu/ethgo v0.0.0-20220303093617-1621d9ff042b
@@ -28,7 +26,7 @@ require (
 	github.com/hashicorp/go-multierror v1.0.0 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.11 // indirect
-	github.com/klauspost/compress v1.17.9 // indirect
+	github.com/klauspost/compress v1.17.11 // indirect
 	github.com/klauspost/cpuid v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.3 // indirect
@@ -39,11 +37,11 @@ require (
 	github.com/tyler-smith/go-bip39 v1.1.0 // indirect
 	github.com/umbracle/fastrlp v0.0.0-20220527094140-59d5dd30e722 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.56.0 // indirect
-	github.com/valyala/fastjson v1.4.1 // indirect
-	golang.org/x/crypto v0.27.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/text v0.18.0 // indirect
+	github.com/valyala/fasthttp v1.59.0 // indirect
+	github.com/valyala/fastjson v1.6.4 // indirect
+	golang.org/x/crypto v0.33.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 )
 
 replace github.com/ginharu/ethgo => ../
