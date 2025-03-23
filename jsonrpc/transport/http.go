@@ -6,8 +6,6 @@ import (
 	"github.com/ginharu/ethgo/jsonrpc/codec"
 	"github.com/valyala/fasthttp"
 	"log"
-	"net"
-	"strings"
 	"sync"
 	"time"
 )
@@ -40,28 +38,6 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 			MaxResponseBodySize:      1024 * 1024 * 1000,
 			MaxConnWaitTimeout:       5 * time.Second,
 			NoDefaultUserAgentHeader: true,
-			Dial: func(addr string) (net.Conn, error) {
-				retries := 3
-				var lastErr error
-
-				for i := 0; i < retries; i++ {
-					conn, err := fasthttp.DialTimeout(addr, 5*time.Second)
-					if err == nil {
-						if tcpConn, ok := conn.(*net.TCPConn); ok {
-							tcpConn.SetKeepAlive(true)
-							tcpConn.SetKeepAlivePeriod(15 * time.Second)
-						}
-						return conn, nil
-					}
-
-					lastErr = err
-					if i < retries-1 {
-						time.Sleep(time.Duration(i+1) * 500 * time.Millisecond)
-					}
-				}
-
-				return nil, fmt.Errorf("连接失败，重试 %d 次后: %v", retries, lastErr)
-			},
 		},
 		headers: headers,
 	}
@@ -79,32 +55,12 @@ func (h *HTTP) Close() error {
 
 // Call implements the transport interface
 func (h *HTTP) Call(method string, out interface{}, params ...interface{}) error {
-	maxRetries := 2
-	var lastErr error
-
-	for i := 0; i <= maxRetries; i++ {
-		err := h.doSingleCall(method, out, params...)
-		if err == nil {
-			return nil
-		}
-
-		lastErr = err
-		// 只有连接错误才重试
-		if !isConnectionError(err) {
-			return err
-		}
-
-		if i < maxRetries {
-			// 指数退避策略
-			backoff := time.Duration(1<<uint(i)) * 200 * time.Millisecond
-			if backoff > 2*time.Second {
-				backoff = 2 * time.Second
-			}
-			time.Sleep(backoff)
-		}
+	// 直接调用单次请求，不进行重试
+	err := h.doSingleCall(method, out, params...)
+	if err != nil {
+		return err
 	}
-
-	return fmt.Errorf("请求失败，重试 %d 次后: %v", maxRetries, lastErr)
+	return nil
 }
 
 // 执行单次调用
@@ -179,33 +135,6 @@ func (h *HTTP) SetMaxConnsPerHost(count int) {
 func (h *HTTP) SetUserAgent(userAgent string) {
 	h.headers["Accept"] = "application/json"
 	h.headers["User-Agent"] = userAgent
-}
-
-// 判断是否是连接相关错误
-func isConnectionError(err error) bool {
-	if err == nil {
-		return false
-	}
-
-	errMsg := err.Error()
-	connectionErrors := []string{
-		"connection reset by peer",
-		"broken pipe",
-		"connection refused",
-		"connection closed",
-		"EOF",
-		"i/o timeout",
-		"server closed connection",
-		"use of closed network connection",
-	}
-
-	for _, msg := range connectionErrors {
-		if strings.Contains(strings.ToLower(errMsg), msg) {
-			return true
-		}
-	}
-
-	return false
 }
 
 // 后台健康检查
