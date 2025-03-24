@@ -29,15 +29,15 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 	h := &HTTP{
 		addr: addr,
 		client: &fasthttp.Client{
-			DialDualStack:            true,
-			MaxConnsPerHost:          1000,
-			MaxIdleConnDuration:      30 * time.Second,
-			MaxConnDuration:          10 * time.Minute,
-			ReadTimeout:              30 * time.Second,
-			WriteTimeout:             30 * time.Second,
-			MaxResponseBodySize:      1024 * 1024 * 1000,
-			MaxConnWaitTimeout:       5 * time.Second,
-			NoDefaultUserAgentHeader: true,
+			DialDualStack:       true,
+			MaxConnsPerHost:     1000,
+			MaxIdleConnDuration: 30 * time.Second,
+			MaxConnDuration:     10 * time.Minute,
+			ReadTimeout:         30 * time.Second,
+			WriteTimeout:        30 * time.Second,
+			MaxResponseBodySize: 1024 * 1024 * 1000,
+			MaxConnWaitTimeout:  5 * time.Second,
+			//NoDefaultUserAgentHeader: true,
 		},
 		headers: headers,
 	}
@@ -98,10 +98,11 @@ func (h *HTTP) doSingleCall(method string, out interface{}, params ...interface{
 	req.SetRequestURI(h.addr)
 	req.Header.SetMethod("POST")
 	req.Header.SetContentType("application/json")
-	//fmt.Print("headers: ", h.headers, "\n")
 	for k, v := range h.headers {
 		req.Header.Add(k, v)
+
 	}
+
 	req.SetBody(raw)
 
 	if err := h.client.Do(req, res); err != nil {
@@ -133,7 +134,9 @@ func (h *HTTP) SetMaxConnsPerHost(count int) {
 }
 
 func (h *HTTP) SetUserAgent(userAgent string) {
-	h.headers["Accept"] = "application/json"
+	h.statsMu.Lock()
+	defer h.statsMu.Unlock()
+	//h.headers["Accept"] = "application/json"
 	h.headers["User-Agent"] = userAgent
 }
 
