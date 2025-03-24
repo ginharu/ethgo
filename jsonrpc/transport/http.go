@@ -7,6 +7,7 @@ import (
 	"github.com/valyala/fasthttp"
 	"log"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -22,7 +23,8 @@ type HTTP struct {
 		lastResetTime     time.Time
 		consecutiveErrors int
 	}
-	statsMu sync.Mutex
+	statsMu   sync.Mutex
+	hasHeader atomic.Int32
 }
 
 func newHTTP(addr string, headers map[string]string) *HTTP {
@@ -37,7 +39,6 @@ func newHTTP(addr string, headers map[string]string) *HTTP {
 			WriteTimeout:        30 * time.Second,
 			MaxResponseBodySize: 1024 * 1024 * 1000,
 			MaxConnWaitTimeout:  5 * time.Second,
-			//NoDefaultUserAgentHeader: true,
 		},
 		headers: headers,
 	}
@@ -98,9 +99,13 @@ func (h *HTTP) doSingleCall(method string, out interface{}, params ...interface{
 	req.SetRequestURI(h.addr)
 	req.Header.SetMethod("POST")
 	req.Header.SetContentType("application/json")
-	for k, v := range h.headers {
-		req.Header.Add(k, v)
 
+	if h.hasHeader.Load() == 1 {
+		h.statsMu.Lock()
+		for k, v := range h.headers {
+			req.Header.Add(k, v)
+		}
+		h.statsMu.Unlock()
 	}
 
 	req.SetBody(raw)
@@ -136,8 +141,12 @@ func (h *HTTP) SetMaxConnsPerHost(count int) {
 func (h *HTTP) SetUserAgent(userAgent string) {
 	h.statsMu.Lock()
 	defer h.statsMu.Unlock()
-	//h.headers["Accept"] = "application/json"
+	a, exists := h.headers["User-Agent"]
+	if exists && a == userAgent {
+		return
+	}
 	h.headers["User-Agent"] = userAgent
+	h.hasHeader.Store(1)
 }
 
 // 后台健康检查
@@ -232,6 +241,14 @@ func (h *HTTP) GetPoolStats() interface{} {
 		ConnectionResets: h.stats.connectionResets,
 		LastResetTime:    h.stats.lastResetTime,
 		ErrorRate:        float64(h.stats.failedRequests) / float64(max(h.stats.totalRequests, 1)),
+	}
+}
+
+func (h *HTTP) updateHeaderFlag() {
+	if len(h.headers) > 0 {
+		h.hasHeader.Store(1)
+	} else {
+		h.hasHeader.Store(0)
 	}
 }
 
